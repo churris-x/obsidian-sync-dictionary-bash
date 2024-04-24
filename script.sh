@@ -1,14 +1,14 @@
 #!/bin/bash
 # MIT @ Francisco Altimari on @1713980634
 
-DEFAULT_PATH=~/.config/obsidian/Custom\ Dictionary.txt
+default_path=~/.config/obsidian/Custom\ Dictionary.txt
 
 if [[ $(uname) == 'Darwin' ]]; then
-    DEFAULT_PATH=~/Library/Application\ Support/obsidian/Custom\ Dictionary.txt
+    default_path=~/Library/Application\ Support/obsidian/Custom\ Dictionary.txt
 fi
 
 echo 'Checking for dictionary file on: ' 
-echo $DEFAULT_PATH
+echo $default_path
 printf '\n'
 
 check_file () {
@@ -32,4 +32,4 @@ edit_file () {
 	# last_line=$(tail )
 }
 
-check_file "$DEFAULT_PATH"
+check_file "$default_path"
