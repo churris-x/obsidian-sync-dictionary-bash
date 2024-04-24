@@ -1,7 +1,7 @@
 #!/bin/bash
 # MIT @ Francisco Altimari on @1713980634
 
-DEFAULT_PATH=undefined
+DEFAULT_PATH=~/.config/obsidian/Custom\ Dictionary.txt
 
 if [[ $(uname) == 'Darwin' ]]; then
     DEFAULT_PATH=~/Library/Application\ Support/obsidian/Custom\ Dictionary.txt
