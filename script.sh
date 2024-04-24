@@ -12,8 +12,8 @@ echo $default_path
 printf '\n'
 
 check_file () {
+    # Check if file is editable, since we will append to it
     if [[ -w "$1" ]]; then
-        echo 'Can edit'
         edit_file "$1"
     else
         echo 'File cannot be edited'
@@ -23,11 +23,14 @@ check_file () {
 }
 
 edit_file () {
-	echo 'path is' $1 
 
 	# cat "$1"
 	# printf '\n'
-	bat "$1"	
+	bat "$1"
+
+    old_words=$(sed '$d' "$1")
+
+    echo $old_words
 
 	# last_line=$(tail )
 }
