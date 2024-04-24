@@ -1,8 +1,11 @@
 #!/bin/bash
 # MIT @ Francisco Altimari on @1713980634
 
-# TODO: use `uname` to get the OS system, eg Darwin, *inux, etc
-DEFAULT_PATH=~/Library/Application\ Support/obsidian/Custom\ Dictionary.txt
+DEFAULT_PATH=undefined
+
+if [[ $(uname) == 'Darwin' ]]; then
+    DEFAULT_PATH=~/Library/Application\ Support/obsidian/Custom\ Dictionary.txt
+fi
 
 echo 'Checking for dictionary file on: ' 
 echo $DEFAULT_PATH
