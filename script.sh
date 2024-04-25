@@ -1,5 +1,5 @@
 #!/bin/bash
-# MIT @ Francisco Altimari on @1713980634
+# MIT Francisco Altimari @1713980634
 
 # TODO: add error if not in a obsidian vault folder
 
@@ -7,15 +7,16 @@
 global_path=~/.config/obsidian/Custom\ Dictionary.txt
 
 # Path of your local vault dictionary
-local_path=./.obsidian/dictionary.txt
+# local_path=./.obsidian/dictionary.txt
+local_path=./dictionary.txt
 
 if [[ $(uname) == 'Darwin' ]]; then
     global_path=~/Library/Application\ Support/obsidian/Custom\ Dictionary.txt
 fi
 
 create_local () {
-    echo "$1" > test.txt
-    echo @$(date +%s) >> test.txt
+    echo "$1" > $local_path
+    echo date = $(date +%s) >> $local_path
 }
 
 check_file () {
@@ -45,7 +46,8 @@ edit_file () {
     echo $old_words
 
     if ! [[ -w $local_path ]]; then
-        echo 'Local dictionary not found'
+        printf "\n"
+        echo 'Local dictionary not found (tried: "'$local_path'")'
         read -p 'Create new one? [y/n]: ' yn
 
         case $yn in
