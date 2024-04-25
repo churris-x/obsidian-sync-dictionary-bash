@@ -13,9 +13,10 @@ if [[ $(uname) == 'Darwin' ]]; then
     global_path=~/Library/Application\ Support/obsidian/Custom\ Dictionary.txt
 fi
 
-echo 'Checking for dictionary file on: ' 
-echo $global_path
-printf '\n'
+create_local () {
+    echo "$1" > test.txt
+    echo @$(date +%s) >> test.txt
+}
 
 check_file () {
     # Check if file is editable, since we will append to it
@@ -43,6 +44,17 @@ edit_file () {
 
     echo $old_words
 
+    if ! [[ -w $local_path ]]; then
+        echo 'Local dictionary not found'
+        read -p 'Create new one? [y/n]: ' yn
+
+        case $yn in
+            [Yy]*) create_local "$old_words";;
+            *) return 0;;
+        esac
+    fi
+
+
 
     # possible states:
     # global (ahead)  |  global (behind)
@@ -51,5 +63,9 @@ edit_file () {
 
 	# last_line=$(tail )
 }
+
+echo 'Checking for dictionary file on: '
+echo $global_path
+printf '\n'
 
 check_file "$global_path"
