@@ -1,7 +1,10 @@
 #!/bin/bash
 # MIT @ Francisco Altimari on @1713980634
 
+# TODO: add error if not in a obsidian vault folder
+
 default_path=~/.config/obsidian/Custom\ Dictionary.txt
+local_path=./.obsidian/dictionary.txt
 
 if [[ $(uname) == 'Darwin' ]]; then
     default_path=~/Library/Application\ Support/obsidian/Custom\ Dictionary.txt
@@ -24,13 +27,25 @@ check_file () {
 
 edit_file () {
 
+    # TODO: delete these debub lines
 	# cat "$1"
 	# printf '\n'
 	bat "$1"
 
-    old_words=$(sed '$d' "$1")
+    old_words=$(tail "$1")
+
+    # Only trim last line if it is the checksum value
+    if [[ $(tail -1 "$1") == 'checksum_v'* ]]; then
+        old_words=$(sed '$d' "$1")
+    fi
 
     echo $old_words
+
+
+    # possible states:
+    # global (ahead)  |  global (behind)
+    # local (behind)  |  local   (ahead)
+
 
 	# last_line=$(tail )
 }
