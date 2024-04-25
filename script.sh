@@ -3,15 +3,18 @@
 
 # TODO: add error if not in a obsidian vault folder
 
-default_path=~/.config/obsidian/Custom\ Dictionary.txt
+# Path of the global system obsidian dictionary
+global_path=~/.config/obsidian/Custom\ Dictionary.txt
+
+# Path of your local vault dictionary
 local_path=./.obsidian/dictionary.txt
 
 if [[ $(uname) == 'Darwin' ]]; then
-    default_path=~/Library/Application\ Support/obsidian/Custom\ Dictionary.txt
+    global_path=~/Library/Application\ Support/obsidian/Custom\ Dictionary.txt
 fi
 
 echo 'Checking for dictionary file on: ' 
-echo $default_path
+echo $global_path
 printf '\n'
 
 check_file () {
@@ -26,8 +29,7 @@ check_file () {
 }
 
 edit_file () {
-
-    # TODO: delete these debub lines
+    # TODO: delete these debug lines
 	# cat "$1"
 	# printf '\n'
 	bat "$1"
@@ -50,4 +52,4 @@ edit_file () {
 	# last_line=$(tail )
 }
 
-check_file "$default_path"
+check_file "$global_path"
