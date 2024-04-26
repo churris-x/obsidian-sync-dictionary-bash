@@ -2,6 +2,7 @@
 # MIT Francisco Altimari @1713980634
 
 # TODO: add error if not in a obsidian vault folder
+# TODO: change variables to use _local_ keyword?
 
 # Path of the global system obsidian dictionary
 global_path=~/.config/obsidian/Custom\ Dictionary.txt
@@ -56,7 +57,8 @@ edit_file () {
         esac
     fi
 
-
+    # TODO: figure out how to make script stop?
+    echo 'more stuff?'
 
     # possible states:
     # global (ahead)  |  global (behind)
