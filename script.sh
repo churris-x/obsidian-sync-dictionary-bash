@@ -1,14 +1,27 @@
 #!/bin/bash
 # MIT Francisco Altimari @1713980634
 
-# TODO: add error if not in a obsidian vault folder
-# TODO: add quiet flag
-# TODO: add help flag and help text
 # TODO: add global / vault flags
+# TODO: Make quiet flag suppress printf / echo
+# TODO: add error if not in a obsidian vault folder
 
 function sync_dictionary () {
     print_help () {
-      printf 'Help:\n    hello\n'
+        local HIGH='\033[0;1m'
+        local RESET='\033[0m'
+
+        printf "A command line utility to keep your obsidian dictionary synced. \n\n"
+        printf "${HIGH}Usage:${RESET} obsidian-sync [ -g | -v ] [OPTIONS]... \n"
+        printf "\n    [ ${HIGH}-g, --global${RESET} | ${HIGH}-v, --vault${RESET} ] REQUIRED\n"
+        printf "\tMutually exclusive option, selects which file to sync.\n"
+        printf "\t-g for the global file, -v for the local vault file.\n"
+        printf "\n    ${HIGH}-i, --interactive${RESET}\n"
+        printf "\tActivates interactive mode. Shows the current diff between the two files\n"
+        printf "\tand allows user to choose in which direction to sync.\n"
+        printf "\n    ${HIGH}-q, --quiet${RESET}\n"
+        printf "\tSuppress terminal output\n"
+        printf "\n    ${HIGH}-h, --help${RESET}\n"
+        printf "\tPrint help\n\n"
     }
 
     if [ $# -eq 0 ]; then print_help; return 1; fi
