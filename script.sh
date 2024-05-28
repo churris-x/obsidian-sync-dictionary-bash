@@ -22,12 +22,12 @@ sync_dictionary () {
             printf "\n  [ ${WHT}-g, --global${RST} | ${WHT}-v, --vault${RST} ] REQUIRED\n"
             printf "\tMutually exclusive option, selects which file to sync.\n"
             printf "\t-g for the global file, -v for the local vault file.\n"
-            printf "\n  ${WHT}-i, --interactive${RST}\n"
-            printf "\tActivates interactive mode. Shows the current diff between the two files\n"
-            printf "\tand allows user to choose in which direction to sync.\n"
-            printf "\n  ${WHT}-q, --quiet${RST}\n"
+            printf "\n    ${WHT}-i, --interactive${RST}\n"
+            printf "\tActivates interactive mode. Shows the current diff between the\n"
+            printf "\ttwo files and allows user to choose in which direction to sync.\n"
+            printf "\n    ${WHT}-q, --quiet${RST}\n"
             printf "\tSuppress terminal output\n"
-            printf "\n  ${WHT}-h, --help${RST}\n"
+            printf "\n    ${WHT}-h, --help${RST}\n"
             printf "\tPrint help\n\n"
         fi
     }
