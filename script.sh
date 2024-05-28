@@ -2,8 +2,37 @@
 # MIT Francisco Altimari @1713980634
 
 # TODO: add error if not in a obsidian vault folder
+# TODO: add silent flag
+# TODO: add help flag and help text
+# TODO: add global / vault flags
 
-sync_dictionary () {
+# echo Params: $@
+
+function sync_dictionary() {
+    local interactive=false
+    local direction=1
+    local silent=false
+
+    print_help() {
+      echo "Help: ..."
+    }
+
+    while getopts "gvsi" flag; do
+        case "${flag}" in
+            g) direction=-1 ;;
+            v) direction=1 ;;
+            s) silent="" ;;
+            i) interactive='true' ;;
+            *) print_help
+               return 1 ;;
+        esac
+    done
+
+    echo $1
+    echo $direction
+
+    return 0
+
 
     # Path of the global system obsidian dictionary
     local global_path=~/.config/obsidian/Custom\ Dictionary.txt
@@ -18,7 +47,7 @@ sync_dictionary () {
 
     create_local () {
         echo "$1" > $local_path
-        echo date = $(date +%s) >> $local_path
+        echo date = $(date +%s) >> $local_path # why do i do this 'date =' ?
     }
 
     check_file () {
@@ -76,4 +105,4 @@ sync_dictionary () {
     check_file "$global_path"
 }
 
-sync_dictionary
+sync_dictionary "$@"
