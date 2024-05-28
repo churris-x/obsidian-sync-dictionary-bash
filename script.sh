@@ -6,29 +6,30 @@
 # TODO: add help flag and help text
 # TODO: add global / vault flags
 
-# echo Params: $@
-
-function sync_dictionary() {
-    local interactive=false
-    local direction=1
-    local silent=false
-
-    print_help() {
-      echo "Help: ..."
+function sync_dictionary () {
+    print_help () {
+      printf 'Help:\n    hello\n'
     }
 
-    while getopts "gvsi" flag; do
-        case "${flag}" in
-            g) direction=-1 ;;
-            v) direction=1 ;;
-            s) silent="" ;;
-            i) interactive='true' ;;
-            *) print_help
-               return 1 ;;
+    if [ $# -eq 0 ]; then print_help; return 1; fi
+
+    local direction=1
+    local interactive=false
+    local silent=false
+
+    # While the number of args is greater than 0:
+    while [ $# -gt 0 ]; do
+        case $1 in
+            -h | --help ) print_help; return 0 ;;
+            -g | --global ) direction=1;;
+            -v | --vault ) direction=-1;;
+            -i | --interactive ) interactive=true;;
+            -s | --silent ) silent=true;;
+            *) print_help; return 1 ;;
         esac
+        shift # Move to next argument
     done
 
-    echo $1
     echo $direction
 
     return 0
