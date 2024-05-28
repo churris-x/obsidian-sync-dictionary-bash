@@ -2,7 +2,7 @@
 # MIT Francisco Altimari @1713980634
 
 # TODO: add error if not in a obsidian vault folder
-# TODO: add silent flag
+# TODO: add quiet flag
 # TODO: add help flag and help text
 # TODO: add global / vault flags
 
@@ -15,7 +15,7 @@ function sync_dictionary () {
 
     local direction=1
     local interactive=false
-    local silent=false
+    local quiet=false
 
     # While the number of args is greater than 0:
     while [ $# -gt 0 ]; do
@@ -24,7 +24,7 @@ function sync_dictionary () {
             -g | --global ) direction=1;;
             -v | --vault ) direction=-1;;
             -i | --interactive ) interactive=true;;
-            -s | --silent ) silent=true;;
+            -q | --quiet ) quiet=true;;
             *) print_help; return 1 ;;
         esac
         shift # Move to next argument
