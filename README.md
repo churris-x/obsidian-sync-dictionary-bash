@@ -21,3 +21,4 @@ The script requires you to pass which file is going to be synced with either the
 - `-s` Silent flag: don't output anything to terminal
 - `-h, --help` Help flag: show summary explaining flags
 - Installation with Homebrew?
+- Create testing script to help quality and knowing how this is supposed to work
