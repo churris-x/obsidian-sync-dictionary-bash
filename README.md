@@ -13,10 +13,11 @@ You can now create a file inside your vaults `.obsidian` folder that will keep k
 
 By default this file is expected to be named `dictionary.txt`.
 
-Always assume the global file is correct, unless in interactive mode.
+The script requires you to pass which file is going to be synced with either the `-g` flag, meaning the global, or the `-v` flag, meaning the vault file will be synced.
 
 ## Planend features
 
-- `-i` Interactive mode: script will prompt for which file to use as the source of truth
-- Config management: Have a config file (using [TOML](https://toml.io/en/))
+- `-i` Interactive mode: script will prompt for which file to use as the source of truth, showing the diff, with the following prompt -> \[`Y`es, `N`o, `S`wap]
+- `-s` Silent flag: don't output anything to terminal
+- `-h, --help` Help flag: show summary explaining flags
 - Installation with Homebrew?
