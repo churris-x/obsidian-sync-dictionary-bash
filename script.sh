@@ -5,28 +5,32 @@
 # TODO: add error if not in a obsidian vault folder
 
 sync_dictionary () {
-    print_help () {
-        local HIGH='\033[0;1m'
-        local RESET='\033[0m'
+    # Colour variables
+    local RST="\033[0m"
+    local WHT="\033[1;1m"
+    local RED="\033[1;31m"
+    # local GRN="\033[1;32m"
+    # local YLW="\033[0;33m"
+    # local ORG="\033[1;33m"
+    # local BLU="\033[1;34m"
 
+    print_help () {
         printf "A command line utility to keep your obsidian dictionary synced. \n\n"
-        printf "${HIGH}Usage:${RESET} obsidian-sync [ -g | -v ] [OPTIONS]... \n"
-        printf "\n  [ ${HIGH}-g, --global${RESET} | ${HIGH}-v, --vault${RESET} ] REQUIRED\n"
+        printf "${WHT}Usage:${RST} obsidian-sync [ -g | -v ] [OPTIONS]... \n"
+        printf "\n  [ ${WHT}-g, --global${RST} | ${WHT}-v, --vault${RST} ] REQUIRED\n"
         printf "\tMutually exclusive option, selects which file to sync.\n"
         printf "\t-g for the global file, -v for the local vault file.\n"
-        printf "\n  ${HIGH}-i, --interactive${RESET}\n"
+        printf "\n  ${WHT}-i, --interactive${RST}\n"
         printf "\tActivates interactive mode. Shows the current diff between the two files\n"
         printf "\tand allows user to choose in which direction to sync.\n"
-        printf "\n  ${HIGH}-q, --quiet${RESET}\n"
+        printf "\n  ${WHT}-q, --quiet${RST}\n"
         printf "\tSuppress terminal output\n"
-        printf "\n  ${HIGH}-h, --help${RESET}\n"
+        printf "\n  ${WHT}-h, --help${RST}\n"
         printf "\tPrint help\n\n"
     }
 
     print_error () {
-        local RESET='\033[0m'
-
-        printf "\033[0;31mError:${RESET} ${1}\n"
+        printf "${RED}Error:${RST} ${1}\n"
     }
 
     if [ $# -eq 0 ]; then print_help; return 1; fi
@@ -44,7 +48,7 @@ sync_dictionary () {
             -i | --interactive ) interactive=true;;
             -q | --quiet ) quiet=true;;
             -??*) set -- "$@" ${1:0:2} -${1:2} ;; # handler for joined flags
-            *) printf "Unknown argument: $1\n\nTry -h for help\n"; return 1 ;;
+            *) print_error "Unknown argument: $1\n\nTry -h for help"; return 1 ;;
         esac
         shift # Move to next argument
     done
