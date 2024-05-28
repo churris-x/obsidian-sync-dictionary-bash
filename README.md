@@ -18,5 +18,4 @@ The script requires you to pass which file is going to be synced with either the
 ## Planend features
 
 - `-i` Interactive mode: script will prompt for which file to use as the source of truth, showing the diff, with the following prompt -> \[`Y`es, `N`o, `S`wap]
-- `-q` Quiet flag: don't output anything to terminal
 - Installation with Homebrew?

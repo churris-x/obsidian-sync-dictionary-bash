@@ -1,10 +1,11 @@
 #!/bin/bash
 # MIT Francisco Altimari @1713980634
 
-# TODO: Make quiet flag suppress printf / echo
 # TODO: add error if not in a obsidian vault folder
 
 sync_dictionary () {
+    local quiet=false
+
     # Colour variables
     local RST="\033[0m"
     local WHT="\033[1;1m"
@@ -15,29 +16,29 @@ sync_dictionary () {
     # local BLU="\033[1;34m"
 
     print_help () {
-        printf "A command line utility to keep your obsidian dictionary synced. \n\n"
-        printf "${WHT}Usage:${RST} obsidian-sync [ -g | -v ] [OPTIONS]... \n"
-        printf "\n  [ ${WHT}-g, --global${RST} | ${WHT}-v, --vault${RST} ] REQUIRED\n"
-        printf "\tMutually exclusive option, selects which file to sync.\n"
-        printf "\t-g for the global file, -v for the local vault file.\n"
-        printf "\n  ${WHT}-i, --interactive${RST}\n"
-        printf "\tActivates interactive mode. Shows the current diff between the two files\n"
-        printf "\tand allows user to choose in which direction to sync.\n"
-        printf "\n  ${WHT}-q, --quiet${RST}\n"
-        printf "\tSuppress terminal output\n"
-        printf "\n  ${WHT}-h, --help${RST}\n"
-        printf "\tPrint help\n\n"
+        if [ $quiet = false ]; then
+            printf "A command line utility to keep your obsidian dictionary synced. \n\n"
+            printf "${WHT}Usage:${RST} obsidian-sync [ -g | -v ] [OPTIONS]... \n"
+            printf "\n  [ ${WHT}-g, --global${RST} | ${WHT}-v, --vault${RST} ] REQUIRED\n"
+            printf "\tMutually exclusive option, selects which file to sync.\n"
+            printf "\t-g for the global file, -v for the local vault file.\n"
+            printf "\n  ${WHT}-i, --interactive${RST}\n"
+            printf "\tActivates interactive mode. Shows the current diff between the two files\n"
+            printf "\tand allows user to choose in which direction to sync.\n"
+            printf "\n  ${WHT}-q, --quiet${RST}\n"
+            printf "\tSuppress terminal output\n"
+            printf "\n  ${WHT}-h, --help${RST}\n"
+            printf "\tPrint help\n\n"
+        fi
     }
-
     print_error () {
-        printf "${RED}Error:${RST} ${1}\n"
+        if [ $quiet = false ]; then printf "${RED}[Error]${RST} ${1}\n"; fi
     }
 
     if [ $# -eq 0 ]; then print_help; return 1; fi
 
     local direction=1
     local interactive=false
-    local quiet=false
 
     # While the number of args is greater than 0:
     while [ $# -gt 0 ]; do
@@ -59,13 +60,12 @@ sync_dictionary () {
     # TODO: remove this
     return 0
 
-
-    # Path of the global system obsidian dictionary
-    local global_path=~/.config/obsidian/Custom\ Dictionary.txt
-
     # Path of your local vault dictionary
     # local_path=./.obsidian/dictionary.txt
     local local_path=./dictionary.txt
+
+    # Path of the global system obsidian dictionary
+    local global_path=~/.config/obsidian/Custom\ Dictionary.txt
 
     if [[ $(uname) == 'Darwin' ]]; then
         local global_path=~/Library/Application\ Support/obsidian/Custom\ Dictionary.txt
