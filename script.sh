@@ -32,9 +32,10 @@ sync_dictionary () {
         fi
     }
     print_error () {
-        if [ $quiet = false ]; then printf "${RED}[Error]${RST} ${1}\n"; fi
+        printf "${RED}[Error]${RST} ${1}\n"
     }
 
+    # Show help if there are no args
     if [ $# -eq 0 ]; then print_help; return 1; fi
 
     local direction=1
@@ -81,7 +82,7 @@ sync_dictionary () {
         if [[ -w "$1" ]]; then
             edit_file "$1"
         else
-            echo 'File cannot be edited'
+            print_error 'File cannot be edited'
             read -ep 'Custom file path: ' custom_path
             check_file "$custom_path"
         fi
@@ -102,9 +103,10 @@ sync_dictionary () {
 
         echo $old_words
 
+        # If there isn't a local file, create it by copying the global file
         if ! [[ -w $local_path ]]; then
             printf "\n"
-            echo 'Local dictionary not found (tried: "'$local_path'")'
+            print_error 'Local dictionary not found (tried: "'$local_path'")'
             read -p 'Create new one? [y/n]: ' yn
 
             case $yn in
