@@ -2,6 +2,8 @@
 # MIT Francisco Altimari @1713980634
 
 # TODO: add error if not in a obsidian vault folder
+# NOTE: does it make sense to add / substitue the
+#       quiet flag with a -f force one?
 
 sync_dictionary () {
     local quiet=false
@@ -73,6 +75,8 @@ sync_dictionary () {
     fi
 
     create_local () {
+        # If $1 does not include .obsidian/ warn and ask to proced anyway
+        # this should be disabled by f
         echo "$1" > $local_path
         echo date = $(date +%s) >> $local_path # why do i do this 'date =' ?
     }
@@ -130,6 +134,11 @@ sync_dictionary () {
     echo $global_path
     printf '\n'
 
+    # TODO: change this to be
+    # check file local
+    # check file global
+
+    # edit file global
     check_file "$global_path"
 }
 
